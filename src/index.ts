@@ -6,12 +6,14 @@ import moduleManager from './manager/moduleManager';
 import { connectDatabase } from './manager/dbManager';
 import { command } from './classes/command';
 import { pingCommand } from './commands/ping';
+import { QuestModule } from './modules/quest';
 
 initialiseConsole();
 connectDatabase();
 botManager.connectBot();
 
 //Register Modules
+moduleManager.registerModule('QuestModule', new QuestModule());
 
 // Register Commands
 commandManager.registerCommand("hey" ,new command('hey', 'Say Hello to Navi!', pingCommand));

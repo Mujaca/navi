@@ -2,11 +2,13 @@ import { GatewayDispatchEvents, InteractionType, Routes } from "@discordjs/core"
 import botManager from "./botManager";
 import { command } from "../classes/command";
 import { SlashCommandBuilder } from "discord.js";
+import { getUser } from "./userManager";
 
 const map:Map<string, command> = new Map();
 
 botManager.client.on('interactionCreate', async (interaction) => {
     if(!interaction.isCommand()) return;
+    await getUser(interaction.user.id)
     const command = map.get(interaction.commandName);
     command?.callBack(interaction);
 })
