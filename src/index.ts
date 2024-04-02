@@ -7,6 +7,8 @@ import { connectDatabase } from './manager/dbManager';
 import { command } from './classes/command';
 import { pingCommand } from './commands/ping';
 import { QuestModule } from './modules/quest';
+import { createEmbed } from './commands/createEmbed';
+import { APIApplicationCommandOptionChoice, Colors } from 'discord.js';
 
 initialiseConsole();
 connectDatabase();
@@ -16,7 +18,13 @@ botManager.connectBot();
 moduleManager.registerModule('QuestModule', new QuestModule());
 
 // Register Commands
-commandManager.registerCommand("hey" ,new command('hey', 'Say Hello to Navi!', pingCommand));
+commandManager.registerCommand('hey', new command('hey', 'Say Hello to Navi!', pingCommand));
+
+const createEmbedCommand = new command('createembed', 'Create a Embed', createEmbed);
+createEmbedCommand.commandBuilder.addStringOption((option) => option.setName('title').setDescription('Title of the Embed').setRequired(true));
+createEmbedCommand.commandBuilder.addStringOption((option) => option.setName('description').setDescription('Description of the Embed').setRequired(true));
+createEmbedCommand.commandBuilder.addStringOption((option) => option.setName('color').setDescription('Color of the Embed').setRequired(false));
+commandManager.registerCommand('createembed', createEmbedCommand);
 
 // Submit Commands to Discord
 commandManager.submitCommands();
