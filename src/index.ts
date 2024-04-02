@@ -14,7 +14,7 @@ botManager.connectBot();
 //Register Modules
 
 // Register Commands
-commandManager.registerCommand("ping" ,new command('ping', 'Ping', pingCommand));
+commandManager.registerCommand("hey" ,new command('hey', 'Say Hello to Navi!', pingCommand));
 
 // Submit Commands to Discord
 commandManager.submitCommands();
