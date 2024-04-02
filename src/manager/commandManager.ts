@@ -24,7 +24,6 @@ async function registerCommand(commandName:string, commandClass:command){
 }
 
 async function submitCommands() {
-    console.log(JSON.stringify(bodyArray))
     await botManager.rest.put(Routes.applicationCommands(process.env.APPLICATION_ID), {
         body: bodyArray
     });
