@@ -10,6 +10,8 @@ import { QuestModule } from './modules/quest';
 import { createEmbed } from './commands/createEmbed';
 import { APIApplicationCommandOptionChoice, Colors } from 'discord.js';
 import { getCat } from './commands/cat';
+import { getCatGirl } from './commands/catGirl';
+import { randomFact } from './commands/randomFact';
 
 initialiseConsole();
 connectDatabase();
@@ -21,6 +23,11 @@ moduleManager.registerModule('QuestModule', new QuestModule());
 // Register Commands
 commandManager.registerCommand('hey', new command('hey', 'Say Hello to Navi!', pingCommand));
 commandManager.registerCommand('cat', new command('cat', 'Get a random cat image', getCat));
+commandManager.registerCommand('catgirl', new command('catgirl', 'Get a random catGirl image', getCatGirl));
+
+const randomFactCommand = new command('randomfact', 'Get a random fact', randomFact);
+randomFactCommand.commandBuilder.addStringOption((option) => option.setName('language').setDescription('Language of the fact').setRequired(false).addChoices({ name: 'English', value: 'en' }, { name: 'German', value: 'de'}));
+commandManager.registerCommand('randomfact', randomFactCommand);
 
 const createEmbedCommand = new command('createembed', 'Create a Embed', createEmbed);
 createEmbedCommand.commandBuilder.addStringOption((option) => option.setName('title').setDescription('Title of the Embed').setRequired(true));
