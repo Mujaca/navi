@@ -9,6 +9,7 @@ import { pingCommand } from './commands/ping';
 import { QuestModule } from './modules/quest';
 import { createEmbed } from './commands/createEmbed';
 import { APIApplicationCommandOptionChoice, Colors } from 'discord.js';
+import { getCat } from './commands/cat';
 
 initialiseConsole();
 connectDatabase();
@@ -19,6 +20,7 @@ moduleManager.registerModule('QuestModule', new QuestModule());
 
 // Register Commands
 commandManager.registerCommand('hey', new command('hey', 'Say Hello to Navi!', pingCommand));
+commandManager.registerCommand('cat', new command('cat', 'Get a random cat image', getCat));
 
 const createEmbedCommand = new command('createembed', 'Create a Embed', createEmbed);
 createEmbedCommand.commandBuilder.addStringOption((option) => option.setName('title').setDescription('Title of the Embed').setRequired(true));
