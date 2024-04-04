@@ -17,7 +17,7 @@ export async function dailyQuest(interaction: ChatInputCommandInteraction) {
 	const embed = new EmbedBuilder();
 	embed.setTitle(quest.name);
 	embed.setDescription(quest.description);
-	embed.addFields([{ name: 'Reward', value: quest.reward.toString() + " Rupies" }]);
+	embed.addFields([{ name: 'Reward', value: quest.reward.toString() + " Rubies" }]);
     embed.setColor('Gold')
 
     interaction.reply({ embeds: [embed], components: [buttonRow] });

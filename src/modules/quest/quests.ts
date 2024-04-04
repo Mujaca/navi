@@ -1,3 +1,4 @@
+import { Quest } from "@prisma/client";
 import dbManager from "../../manager/dbManager";
 
 const QUESTS:{name:string,description:string}[] = [
@@ -96,4 +97,28 @@ export async function getTodayQuest() {
     })
 
     return quest
+}
+
+export async function getUserQuest(userId: string):Promise<Quest> {
+    const quest = await dbManager.db.quest.findFirst({
+        where: {
+            userId,
+            completed: false
+        }
+    })
+
+    return quest || await createUserQuest(userId)
+}
+
+async function createUserQuest(userId: string):Promise<Quest> {
+    const quest = getRandomQuest()
+
+    return await dbManager.db.quest.create({
+        data: {
+            userId,
+            reward: 100,
+            name: quest.name,
+            description: quest.description,
+        }
+    })
 }
