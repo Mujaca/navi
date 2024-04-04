@@ -24,6 +24,7 @@ const createEmbedCommand = new command('createembed', 'Create a Embed', createEm
 createEmbedCommand.commandBuilder.addStringOption((option) => option.setName('title').setDescription('Title of the Embed').setRequired(true));
 createEmbedCommand.commandBuilder.addStringOption((option) => option.setName('description').setDescription('Description of the Embed').setRequired(true));
 createEmbedCommand.commandBuilder.addStringOption((option) => option.setName('color').setDescription('Color of the Embed').setRequired(false));
+createEmbedCommand.commandBuilder.addStringOption((option) => option.setName('image').setDescription('Image URL of the Embed').setRequired(false));
 commandManager.registerCommand('createembed', createEmbedCommand);
 
 // Submit Commands to Discord

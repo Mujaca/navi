@@ -5,6 +5,7 @@ export async function createEmbed(interaction: ChatInputCommandInteraction) {
     const title = interaction.options.getString("title");
     const description = interaction.options.getString("description");
     const color = interaction.options.getString("color");
+    const imageUrl = interaction.options.getString("image");
 
     embed.setTitle(title);
     embed.setDescription(description);
@@ -13,6 +14,7 @@ export async function createEmbed(interaction: ChatInputCommandInteraction) {
         name: interaction.user.displayName,
         iconURL: interaction.user.avatarURL()
     });
+    if(imageUrl) embed.setImage(imageUrl);
 
     return await interaction.reply({ embeds: [embed] });
 }
