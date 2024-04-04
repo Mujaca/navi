@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
+import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
 import { getUserQuest } from "../quests";
 
 export async function quest(interaction: ChatInputCommandInteraction) {
@@ -23,5 +23,13 @@ export async function quest(interaction: ChatInputCommandInteraction) {
     embed.addFields([{ name: 'Reward', value: quest.reward.toString() + " Rupies" }]);
     embed.setColor('Gold')
 
-    interaction.reply({ embeds: [embed], components: [buttonRow] });
+    const a = await interaction.reply({ embeds: [embed], components: [buttonRow] });
+}
+
+export async function questDone(interaction: ButtonInteraction) {
+    interaction.reply({ content: 'Coming soon™', ephemeral: true })
+}
+
+export async function questSkip(interaction: ButtonInteraction) {
+    interaction.reply({ content: 'Coming soon™', ephemeral: true })
 }

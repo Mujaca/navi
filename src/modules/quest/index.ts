@@ -7,7 +7,7 @@ import { dailyQuest, dailyQuestDone } from "./commands/daily-quest";
 import commandManager from "../../manager/commandManager";
 import interactionManager from "../../manager/interactionManager";
 import { interaction } from "../../classes/interaction";
-import { quest } from "./commands/quest";
+import { quest, questDone, questSkip } from "./commands/quest";
 
 export class QuestModule extends Module {
     constructor() {
@@ -19,6 +19,8 @@ export class QuestModule extends Module {
         commandManager.registerCommand("quest", questCommand);
         commandManager.registerCommand("dailyquest", dailyQuestCommand);
         interactionManager.registerInteraction('dailyQuestDone', new interaction('dailyQuestDone', dailyQuestDone));
+        interactionManager.registerInteraction('questDone', new interaction('questDone', questDone));
+        interactionManager.registerInteraction('questSkip', new interaction('questSkip', questSkip));
 
         const questCron = new CronJob('0 0 0 * * *', this.newQuest);
         questCron.start();
