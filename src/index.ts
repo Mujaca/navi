@@ -12,6 +12,7 @@ import { APIApplicationCommandOptionChoice, Colors } from 'discord.js';
 import { getCat } from './commands/cat';
 import { getCatGirl } from './commands/catGirl';
 import { randomFact } from './commands/randomFact';
+import { randomQuote } from './commands/randomQuote';
 
 initialiseConsole();
 connectDatabase();
@@ -25,6 +26,7 @@ commandManager.registerCommand('hey', new command('hey', 'Say Hello to Navi!', p
 commandManager.registerCommand('cat', new command('cat', 'Get a random cat image', getCat));
 commandManager.registerCommand('catgirl', new command('catgirl', 'Get a random catGirl image', getCatGirl));
 
+commandManager.registerCommand('randomquote', new command('randomquote', 'Get a random Quote', randomQuote));
 const randomFactCommand = new command('randomfact', 'Get a random fact', randomFact);
 randomFactCommand.commandBuilder.addStringOption((option) => option.setName('language').setDescription('Language of the fact').setRequired(false).addChoices({ name: 'English', value: 'en' }, { name: 'German', value: 'de'}));
 commandManager.registerCommand('randomfact', randomFactCommand);
