@@ -4,7 +4,7 @@ import axios from 'axios';
 import { ChatInputCommandInteraction, EmbedBuilder } from 'discord.js';
 
 export async function getCatGirl(interaction: ChatInputCommandInteraction) {
-    const cat = await axios.get('https://api.nekosapi.com/v3/images/random?limit=1&rating=safe');
+    const cat = await axios.get('https://api.nekosapi.com/v3/images/random?limit=1&rating=safe&tag=8');
     const imageUrl = cat.data.items[0].image_url;
 
     const embed = new EmbedBuilder();
