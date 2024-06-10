@@ -17,6 +17,16 @@ model BotUser {
   rupies          Int                   @default(0)
   completedQuests completedDailyQuest[]
   quests          Quest[]
+  suggestions     Suggestion[]
+}
+
+model Suggestion {
+  id          Int     @id @default(autoincrement())
+  user        BotUser @relation(fields: [userId], references: [id])
+  userId      String
+  suggestion  String  @db.LongText
+  createdAt   DateTime @default(now())
+
 }
 
 model DailyQuest {

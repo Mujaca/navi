@@ -13,6 +13,7 @@ import { getCat } from './commands/cat';
 import { getCatGirl } from './commands/catGirl';
 import { randomFact } from './commands/randomFact';
 import { randomQuote } from './commands/randomQuote';
+import { addSuggestion } from './commands/suggestion';
 
 initialiseConsole();
 connectDatabase();
@@ -39,6 +40,10 @@ createEmbedCommand.commandBuilder.addStringOption((option) => option.setName('de
 createEmbedCommand.commandBuilder.addStringOption((option) => option.setName('color').setDescription('Color of the Embed').setRequired(false));
 createEmbedCommand.commandBuilder.addStringOption((option) => option.setName('image').setDescription('Image URL of the Embed').setRequired(false));
 commandManager.registerCommand('createembed', createEmbedCommand);
+
+const suggestionCommand = new command('suggestion', 'Add a Suggestion', addSuggestion);
+suggestionCommand.commandBuilder.addStringOption((option) => option.setName('suggestion').setDescription('Suggestion to add').setRequired(true));
+commandManager.registerCommand('suggestion', suggestionCommand);
 
 // Submit Commands to Discord
 commandManager.submitCommands();

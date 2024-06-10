@@ -9,7 +9,7 @@ export async function getCatGirl(interaction: ChatInputCommandInteraction) {
     if(character) {
         const characterId = await axios.get(`https://api.nekosapi.com/v3/characters?search=${character}`);
         if(characterId.data.items.length === 0) {
-            return await interaction.reply('Character not found');
+            return await interaction.reply({content: 'Character not found', ephemeral: true});
         }
         url += `&character=${characterId.data.items[0].id}`;
     }
