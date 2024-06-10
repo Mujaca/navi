@@ -24,7 +24,9 @@ moduleManager.registerModule('QuestModule', new QuestModule());
 // Register Commands
 commandManager.registerCommand('hey', new command('hey', 'Say Hello to Navi!', pingCommand));
 commandManager.registerCommand('cat', new command('cat', 'Get a random cat image', getCat));
-commandManager.registerCommand('catgirl', new command('catgirl', 'Get a random catGirl image', getCatGirl));
+const catgirl = new command('catgirl', 'Get a random catGirl image', getCatGirl);
+catgirl.commandBuilder.addStringOption((option) => option.setName('Character').setDescription("What Catgirl do you want an image of?").setRequired(false))
+commandManager.registerCommand('catgirl', catgirl);
 
 commandManager.registerCommand('randomquote', new command('randomquote', 'Get a random Quote', randomQuote));
 const randomFactCommand = new command('randomfact', 'Get a random fact', randomFact);

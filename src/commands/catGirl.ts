@@ -4,7 +4,19 @@ import axios from 'axios';
 import { ChatInputCommandInteraction, EmbedBuilder } from 'discord.js';
 
 export async function getCatGirl(interaction: ChatInputCommandInteraction) {
-    const cat = await axios.get('https://api.nekosapi.com/v3/images/random?limit=1&rating=safe&tag=8');
+    const character = interaction.options.getString('Character');
+    let url = 'https://api.nekosapi.com/v3/images/random?limit=1&rating=safe';
+    if(character) {
+        const characterId = await axios.get(`https://api.nekosapi.com/v3/characters?search=${character}`);
+        if(characterId.data.items.length === 0) {
+            return await interaction.reply('Character not found');
+        }
+        url += `&character=${characterId.data.items[0].id}`;
+    }
+    if(!character) url += '&tag=8';
+
+
+    const cat = await axios.get(url);
     const imageUrl = cat.data.items[0].image_url;
 
     const embed = new EmbedBuilder();
