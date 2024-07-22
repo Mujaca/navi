@@ -29,7 +29,7 @@ const catgirl = new command('catgirl', 'Get a random catGirl image', getCatGirl)
 catgirl.commandBuilder.addStringOption((option) => option.setName('character').setDescription("What Catgirl do you want an image of?").setRequired(false))
 commandManager.registerCommand('catgirl', catgirl);
 
-commandManager.registerCommand('randomquote', new command('randomquote', 'Get a random Quote', randomQuote));
+//commandManager.registerCommand('randomquote', new command('randomquote', 'Get a random Quote', randomQuote));
 const randomFactCommand = new command('randomfact', 'Get a random fact', randomFact);
 randomFactCommand.commandBuilder.addStringOption((option) => option.setName('language').setDescription('Language of the fact').setRequired(false).addChoices({ name: 'English', value: 'en' }, { name: 'German', value: 'de'}));
 commandManager.registerCommand('randomfact', randomFactCommand);

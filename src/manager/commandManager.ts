@@ -3,6 +3,7 @@ import botManager from "./botManager";
 import { command } from "../classes/command";
 import { SlashCommandBuilder } from "discord.js";
 import { getUser } from "./userManager";
+import dbManager from "./dbManager";
 
 const map:Map<string, command> = new Map();
 
@@ -10,6 +11,24 @@ botManager.client.on('interactionCreate', async (interaction) => {
     if(!interaction.isCommand()) return;
     await getUser(interaction.user.id)
     const command = map.get(interaction.commandName);
+
+    const dbCommand = await dbManager.db.commandUssage.findFirst({
+        where: {
+            command: interaction.commandName
+        }
+    })
+
+    await dbManager.db.commandUssage.update({
+        data: {
+            usage: {
+                increment: 1
+            }
+        },
+        where: {
+            id: dbCommand.id
+        }
+    })
+
     command?.callBack(interaction);
 })
 
@@ -22,6 +41,19 @@ async function registerCommand(commandName:string, commandClass:command){
     // @ts-ignoremus
     command.contexts = [0, 1, 2];
     bodyArray.push(command)
+    
+    const dbCommand = await dbManager.db.commandUssage.findFirst({
+        where: {
+            command: commandName
+        }
+    })
+    if(!dbCommand) await dbManager.db.commandUssage.create({
+        data: {
+            command: commandName,
+            usage: 0
+        }
+    })
+
     console.error("Registered command: " + commandName + "")
 }
 

@@ -26,7 +26,6 @@ model Suggestion {
   userId      String
   suggestion  String  @db.LongText
   createdAt   DateTime @default(now())
-
 }
 
 model DailyQuest {
@@ -56,4 +55,10 @@ model completedDailyQuest {
   quest       DailyQuest @relation(fields: [questId], references: [id])
   questId     Int
   completedAt DateTime  @default(now())
+}
+
+model commandUssage {
+  id    Int   @id @default(autoincrement())
+  command String
+  usage Int
 }
