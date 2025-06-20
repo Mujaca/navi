@@ -17,7 +17,7 @@ export async function getCatGirl(interaction: ChatInputCommandInteraction) {
 
 
     const cat = await axios.get(url);
-    const imageUrl = cat.data.items[0].image_url;
+    const imageUrl = cat.data.items[0].url;
 
     const embed = new EmbedBuilder();
     embed.setImage(imageUrl);
