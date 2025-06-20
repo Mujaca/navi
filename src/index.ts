@@ -14,6 +14,7 @@ import { getCatGirl } from './commands/catGirl';
 import { randomFact } from './commands/randomFact';
 import { randomQuote } from './commands/randomQuote';
 import { addSuggestion } from './commands/suggestion';
+import { getFox } from './commands/fox';
 
 initialiseConsole();
 connectDatabase();
@@ -25,6 +26,7 @@ botManager.connectBot();
 // Register Commands
 commandManager.registerCommand('hey', new command('hey', 'Say Hello to Navi!', pingCommand));
 commandManager.registerCommand('cat', new command('cat', 'Get a random cat image', getCat));
+commandManager.registerCommand('fox', new command('fox', 'Get a random fox image', getFox));
 const catgirl = new command('catgirl', 'Get a random catGirl image', getCatGirl);
 catgirl.commandBuilder.addStringOption((option) => option.setName('character').setDescription("What Catgirl do you want an image of?").setRequired(false))
 commandManager.registerCommand('catgirl', catgirl);
